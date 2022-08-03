@@ -1,0 +1,29 @@
+.mb-0 >span {
+    padding: 5%;
+}
+.bottom {
+    padding-right: 10%;
+}
+.card.bg-dark.text-white {
+    border-radius: 1rem;
+}
+
+.fw-bold.mb-2.text-uppercase {
+    color: orange;
+}
+
+.btn.btn-outline-light.btn-lg.px-5 {
+    background-color: #fff;
+    color: black 
+}
+
+.btn.btn-outline-light.btn-lg.px-5:hover {
+    background-color: orange;
+    color: white;
+    font-weight: 700; 
+}
+
+.form-control.form-control-lg {
+    height: 40px !important;
+}
+
