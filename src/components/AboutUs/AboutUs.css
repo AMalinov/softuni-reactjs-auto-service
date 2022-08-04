@@ -3,8 +3,31 @@
     text-align: center;
 }
 
-.from-to >p {
+.from-to>p {
     font-weight: 700;
     font-size: 1rem;
     color: black;
+}
+
+.header>h2 {
+    text-align: center;
+}
+
+.mb-0.about {
+    text-align: center;
+}
+
+.text-white-sign-up.fw-bold.about {
+    color: black;
+    border: 1px;
+    border-radius: 2rem;
+    background-color: rgb(199, 194, 194);
+    padding: 3px;
+}
+
+.text-white-sign-up.fw-bold.about:hover {
+    background-color: #fd7e14;
+    font-size: 800;
+    color: #fff;
+    cursor: pointer;
 }
