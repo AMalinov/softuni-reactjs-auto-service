@@ -1,0 +1,19 @@
+.container.add-car {
+    display: grid;
+    justify-content: center;
+}
+
+.py-5.addForm>h1 {
+    text-align: center;
+}
+
+input {
+    width: 500px;
+}
+
+.btn.btn-primary.addCar{
+   display: inline-block;
+   align-items: center;
+   margin-left: 200px;
+   margin-bottom: 110px;
+}
