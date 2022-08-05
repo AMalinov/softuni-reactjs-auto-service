@@ -15,6 +15,7 @@ const Navigation = () => {
                 <div className="collapse navbar-collapse" id="ftco-nav">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item"><Link to="/" className="nav-item nav-link btn-custom" title="Home">Home</Link></li>
+                        <li className="nav-item"><Link to="/comments" className="nav-link"> Comments </Link></li>
                         {!user.email ?
                             <>
                                 <li className="nav-item"><Link to="/login" className="nav-link"> Login </Link></li>
