@@ -1,5 +1,6 @@
 import './Comments.css'
-const Comments = () => {
+const Comments = ({ user }) => {
+
     return (
         <section className="comment section">
             <div className="container my-5 py-5 text-dark">
@@ -29,37 +30,44 @@ const Comments = () => {
                     </div>
                 </div>
             </div>
-            <article className="create-comment">
-                <label>Add new comment:</label>
-                <form className="form" onSubmit="{addCommentHandler}">
-                    <input
-                        type="text"
-                        name="username"
-                        placeholder="John Doe"
-                        onChange="{onChange}"
-                        onBlur="{validateUsername}"
-                        value="{comment.username}"
-                    />
-                    <br />
-                    {/* {error.username &&
-
-                        <div style={{ color: 'red', fontSize: '1.5em' }}></div>
-                    } */}
-                    <textarea
-                        name="comment"
-                        placeholder="Comment......"
-                        onChange="{onChange}"
-                        onBlur="{validateCommentInput}"
-                        value="{comment.comment}"
-                    />
-                    <input
-                        className="btn submit"
-                        type="submit"
-                        value="Add Comment"
-                    />
-                </form>
-            </article>
-        </section>
+            {user.email
+                ?
+                <>
+                    <article className="create-comment">
+                        <label>Add new comment:</label>
+                        <form className="form" onSubmit="{addCommentHandler}">
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="John Doe"
+                                onChange="{onChange}"
+                                onBlur="{validateUsername}"
+                                value="{comment.username}"
+                            />
+                            <br />
+                            {/* {error.username &&
+            
+                                    <div style={{ color: 'red', fontSize: '1.5em' }}></div>
+                                } */}
+                            <textarea
+                                name="comment"
+                                placeholder="Comment......"
+                                onChange="{onChange}"
+                                onBlur="{validateCommentInput}"
+                                value="{comment.comment}"
+                            />
+                            <input
+                                className="btn submit"
+                                type="submit"
+                                value="Add Comment"
+                            />
+                        </form>
+                    </article>
+                </>
+                :
+                <p>Register to add comments!</p>
+            }
+        </section >
 
     );
 }
