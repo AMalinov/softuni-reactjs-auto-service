@@ -1,0 +1,25 @@
+.myCars {
+    display: inline-block;
+}
+
+.carImage {
+    border-radius: 20rem;
+    max-width: 20rem;
+}
+
+.myCars-info {
+    display: block;
+    max-width: 25em;
+    margin: 2rem;
+    border: 1px solid black;
+    border-radius: 10%;
+    padding: 10px;
+    background-color: #f4f2f1
+}
+
+.edit,
+.remove {
+    align-items: center;
+    background-color: red;
+    width: 15rem;
+}
