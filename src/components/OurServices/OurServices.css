@@ -1,5 +1,5 @@
 .btn-my-custom {
-    border: 1px ;
+    border: 1px;
     border-radius: 2rem;
     background-color: rgb(199, 194, 194);
 }
@@ -14,6 +14,19 @@
 .orderService {
     background-color: #343a40;
     text-align: center;
-    margin-top: 5em;
-    margin-bottom: 120px;
+    /* margin-top: 5em; */
+    margin-bottom: 75px;
+}
+
+.service,
+.cars {
+    margin-top: 1em;
+    padding-bottom: 15px;
+    font-size: large;
+    font-weight: 600;
+}
+
+.order {
+    margin-top: 2em;
+    margin-bottom: 2em;
 }

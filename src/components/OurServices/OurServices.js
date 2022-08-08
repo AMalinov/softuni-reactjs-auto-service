@@ -112,7 +112,7 @@ const OurServices = ({ user }) => {
                             </div>
                         </div>
                         <form action="" className="orderService">
-                            <label htmlFor="service">Choose service</label>
+                            <label htmlFor="service" className="fw-bold mb-2 text-uppercase service">Choose service</label>
                             <select name="service" id="service" className="form-control form-control-lg">
                                 <option value="defaultSelected">Select Service</option>
                                 <option value="oil-change 30">Oil Change - 30$</option>
@@ -122,7 +122,7 @@ const OurServices = ({ user }) => {
                                 <option value="engine-repair 100">Engine repair - 100$</option>
                                 <option value="car-maintenace 200">Car maintenance - 200$</option>
                             </select>
-                            <label htmlFor="cars">Choose a car:</label>
+                            <label htmlFor="cars" className="fw-bold mb-2 text-uppercase cars">Choose a car</label>
                             <select id="cars" name="cars" className="form-control form-control-lg" onChange={e => setSelectedCar(e.target.value)}>
                                 <option value="defaultSelected">Select Car</option>
                                 {/* {Object.entries(cars).map(([key, car]) => (
@@ -135,7 +135,7 @@ const OurServices = ({ user }) => {
                                 }
                             </select>
                             <button
-                                className="btn btn-outline-light btn-lg px-5"
+                                className="btn btn-outline-light btn-lg px-5 order"
                                 type="submit"
                                 onClick={onSubmitHandler}
 
