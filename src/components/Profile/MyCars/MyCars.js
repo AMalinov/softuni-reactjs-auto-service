@@ -4,11 +4,7 @@ const MyCars = ({
     car
 }) => {
 
-    const editHandler = (e) => {
-
-    }
-
-
+    console.log(car);
     return (
         <div className="myCars">
             <div className="myCars-info">
@@ -20,8 +16,8 @@ const MyCars = ({
                     <li>{car.carMilage}</li>
                     <li>{car.description}</li>
                     <li>{car.ownerEmail}</li>
-                    <button className="btn btn-outline-light btn-lg px-5 edit" onClick={editHandler}>Edit</button>
-                    <button className="btn btn-outline-light btn-lg px-5 remove">Remove</button>
+                    <Link to={`/car/${car._id}/edit`} key={car._id} className="btn btn-outline-light btn-lg px-5 edit">Edit</Link>
+                    <Link to={`/car/${car._id}/delete`} key={car._id} className="btn btn-outline-light btn-lg px-5 remove">Remove</Link>
                 </ul>
             </div>
         </div>

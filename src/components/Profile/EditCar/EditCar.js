@@ -1,54 +1,77 @@
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../contexts/AuthContext';
-import * as carService from '../../services/carService'
-import { v4 as uuid } from 'uuid';
-import './AddCar.css';
+import { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
 
-const AddCar = () => {
+import * as carService from '../../../services/carService';
+import { CarContext } from "../../../contexts/CarContext";
+import AuthContext from "../../../contexts/AuthContext";
 
+const EditCar = () => {
     const { user } = useContext(AuthContext);
+    const [currentCar, setCurrentCar] = useState({});
+    const { carEdit } = useContext(CarContext);
+    const { carId } = useParams();
     const navigate = useNavigate();
 
-    const addCarHandler = (e) => {
+    useEffect(() => {
+        carService.getOneCar(carId)
+            .then(carData => {
+                setCurrentCar(carData);
+            })
+    }, [])
+
+    const onSubmit = (e) => {
         e.preventDefault();
+        console.log(currentCar._id);
+        let email = user.ownerEmail;
+        const carData = new FormData(e.target);
+        // let carData = new FormData(e.currentTarget);
+        // console.log(...carData);
+        // console.log(currentCar);
 
-        let carData = new FormData(e.currentTarget);
-
-        let _id = uuid();
+        let carBrand = carData.get("carBrand");
         let regNumber = carData.get("regNumber");
         let year = carData.get("year");
         let imageURL = carData.get("carImage");
-        let carBrand = carData.get("carBrand");
         let carMilage = carData.get("milage");
         let description = carData.get("description");
-        let ownerEmail = user.email;
+        let ownerEmail = email;
+        // console.log(carBrand);
+        // console.log(regNumber);
+        // console.log(year);
+        // console.log(imageURL);
+        // console.log(carMilage);
+        // console.log(description);
+        // console.log(ownerEmail);
+        console.log(carData.ownerEmail);
 
+        let data = {
+            _id: currentCar._id,
+            carBrand,
+            regNumber,
+            year,
+            imageURL,
+            carMilage,
+            description,
+            ownerEmail: currentCar.ownerEmail
+        }
         carService
-            .addCar(
-                {
-                    _id,
-                    regNumber,
-                    year,
-                    imageURL,
-                    carBrand,
-                    carMilage,
-                    description,
-                    ownerEmail,
-                },
+            .editCar(
+                currentCar._id,
+                data,
                 user.accessToken
             )
-            .then(navigate('/'));
+            .then(result => {
+                carEdit(carData, result);
+                navigate("/profile");
+            });
     };
-
-    console.log(user.accessToken);
 
     return (
         <section className="py-5 addForm" id="offer-trip-page">
-            <h1>Add Car</h1>
+            <h1>Edit your {currentCar.carBrand}</h1>
             <div className="container add-car">
                 <div>
-                    <form onSubmit={addCarHandler} method="post">
+                    <form onSubmit={onSubmit} method="post">
                         <div className="offer-label">
                             <div>
                                 <label htmlFor="carBrand">Car Brand</label>
@@ -60,6 +83,7 @@ const AddCar = () => {
                                     id="carBrand"
                                     placeholder="Audi"
                                     name="carBrand"
+                                    defaultValue={currentCar.carBrand}
                                 />
                             </div>
                             <label htmlFor="regNumber">
@@ -73,6 +97,8 @@ const AddCar = () => {
                                 id="regNumber"
                                 name="regNumber"
                                 placeholder="E1234EE, BEAST1"
+                                defaultValue={currentCar.regNumber}
+
                             />
                         </div>
                         <div className="offer-label">
@@ -87,6 +113,8 @@ const AddCar = () => {
                                 id="year"
                                 placeholder="1990"
                                 name="year"
+                                defaultValue={currentCar.year}
+
                             />
                         </div>
                         <div className="offer-label">
@@ -99,6 +127,8 @@ const AddCar = () => {
                                 id="carImage"
                                 placeholder="https://..."
                                 name="carImage"
+                                defaultValue={currentCar.imageURL}
+
                             />
                         </div>
                         <div className="offer-label">
@@ -111,6 +141,8 @@ const AddCar = () => {
                                 id="milage"
                                 placeholder="100000"
                                 name="milage"
+                                defaultValue={currentCar.carMilage}
+
                             />
                         </div>
                         <div className="form-group">
@@ -120,6 +152,7 @@ const AddCar = () => {
                                 id="description"
                                 placeholder="Flat tire..."
                                 name="description"
+                                defaultValue={currentCar.description}
                             />
                         </div>
                         <button type="submit" className="btn btn-primary addCar">
@@ -130,6 +163,6 @@ const AddCar = () => {
             </div>
         </section>
     );
-};
+}
 
-export default AddCar;
+export default EditCar;

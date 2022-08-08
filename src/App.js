@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import AuthContext from './contexts/AuthContext';
 import useLocalStorage from "./hooks/useLocalStorage";
@@ -18,11 +18,14 @@ import Logout from './components/Logout/Logout';
 import AddCar from './components/AddCar/AddCar';
 import Profile from './components/Profile/Profile';
 import { useEffect, useState } from 'react';
+import EditCar from './components/Profile/EditCar/EditCar';
+import { CarContext } from './contexts/CarContext';
+import DeleteCar from './components/Profile/DeleteCar/DeleteCar';
 
 
 function App() {
     const [cars, setCars] = useState([]);
-
+    const navigate = useNavigate();
 
     const [user, setUser] = useLocalStorage("user", {
         _id: "",
@@ -54,6 +57,19 @@ function App() {
             })
     }, []);
 
+    const carAdd = (carData) => {
+        setCars(state => [
+            ...state,
+            carData,
+        ]);
+
+        navigate('/catalog');
+    };
+
+    const carEdit = (carId, carData) => {
+        setCars(state => state.map(x => x._id === carId ? carData : x));
+    }
+
 
     return (
 
@@ -63,17 +79,22 @@ function App() {
                 <Header />
                 <Navigation />
                 <main className="main-display">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/services" element={<OurServices user={user} />} />
-                        <Route path="/about-us" element={<AboutUs />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/comments" element={<Comments user={user} />} />
-                        <Route path="/logout" element={<Logout />} />
-                        <Route path="/add-car" element={<AddCar />} />
-                        <Route path="/profile" element={<Profile cars={cars} email={user.email} />} />
-                    </Routes>
+                    <CarContext.Provider value={{ cars, carAdd, carEdit }}>
+
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/services" element={<OurServices user={user} />} />
+                            <Route path="/about-us" element={<AboutUs />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/comments" element={<Comments user={user} />} />
+                            <Route path="/logout" element={<Logout />} />
+                            <Route path="/add-car" element={<AddCar />} />
+                            <Route path="/profile" element={<Profile cars={cars} email={user.email} onClick={}/>} />
+                            <Route path="/car/:carId/edit" element={<EditCar />} />
+                            <Route path="/car/:carId/delete" element={<DeleteCar />} />
+                        </Routes>
+                    </CarContext.Provider>
                 </main>
                 <Footer />
             </div>
