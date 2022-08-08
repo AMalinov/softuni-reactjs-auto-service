@@ -17,7 +17,17 @@ const OurServices = ({ user }) => {
     }, []);
 
 
-    let test = cars.filter(x => x.ownerEmail === user.email)
+    let userCars = cars.filter(x => x.ownerEmail === user.email)
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+
+        console.log(e.target.parentElement[1].value);
+        if(e.target.parentElement[0].value == 'defaultSelected') {
+            alert('choose a service');
+            return;
+        }
+    }
 
     return (
         <>
@@ -105,12 +115,12 @@ const OurServices = ({ user }) => {
                             <label htmlFor="service">Choose service</label>
                             <select name="service" id="service" className="form-control form-control-lg">
                                 <option value="defaultSelected">Select Service</option>
-                                <option value="oil-change">Oil Change</option>
-                                <option value="battery-check">Batery Check</option>
-                                <option value="emergency-car">Emergency car</option>
-                                <option value="tire-change">Tire change</option>
-                                <option value="engine-repair">Engine repair</option>
-                                <option value="car-maintenace">Car maintenance</option>
+                                <option value="oil-change 30">Oil Change - 30$</option>
+                                <option value="battery-check 50">Batery Check - 50$</option>
+                                <option value="emergency-car 80">Emergency car - 80$</option>
+                                <option value="tire-change 30">Tire change - 30$</option>
+                                <option value="engine-repair 100">Engine repair - 100$</option>
+                                <option value="car-maintenace 200">Car maintenance - 200$</option>
                             </select>
                             <label htmlFor="cars">Choose a car:</label>
                             <select id="cars" name="cars" className="form-control form-control-lg" onChange={e => setSelectedCar(e.target.value)}>
@@ -119,14 +129,15 @@ const OurServices = ({ user }) => {
                                     <option key={car._id}>{car.carBrand}</option>
                                 ))} */}
                                 {
-                                    test.map(c => (
-                                        <option key={c._id}>{c.carBrand}</option>
+                                    userCars.map(c => (
+                                        <option key={c._id}>{c.carBrand + ' - ' + c.regNumber}</option>
                                     ))
                                 }
                             </select>
                             <button
                                 className="btn btn-outline-light btn-lg px-5"
                                 type="submit"
+                                onClick={onSubmitHandler}
 
                             >
                                 Order Service
