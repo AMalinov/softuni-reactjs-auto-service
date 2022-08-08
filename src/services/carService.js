@@ -33,7 +33,7 @@ export async function addCar(carData, token) {
   return result;
 }
 
-export async function updateCar(carId, carData, token) {
+export async function editCar(carId, carData, token) {
   let response = await fetch(`${URL}/car/${carId}`, {
     method: "PUT",
     headers: {
