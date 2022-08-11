@@ -10,43 +10,37 @@ import AuthContext from "../../contexts/AuthContext";
 
 
 const Register = () => {
-
-    const navigate = useNavigate();
     const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const registerHandler = (e) => {
         e.preventDefault();
-        // console.log(e.target.email.value);
-        let { email, password} = Object.fromEntries(
-            new FormData(e.currentTarget)
-        );
 
-        authService.register(email, password).then((authData) => {
-            login(authData);
+        const formData = new FormData(e.target);
 
-            navigate("/");
-        });
-    };
+        const email = formData.get('email');
+        const password = formData.get('password');
+        const rePass = formData.get('rePassword');
 
-    const textInput = useRef(null);
-
-    const rePassValidation = (e) => {
-        e.preventDefault();
-        let rePassword = e.target.value;
-        let password = textInput.current.value;
-        if (password !== rePassword) {
-            alert("Passwords must match");
+        if (password !== rePass) {
+            return (
+                alert("Passwords must match")
+            );
         }
-    };
 
-
+        authService.register(email, password)
+            .then(authData => {
+                login(authData);
+                navigate('/');
+            });
+    }
 
 
     return (
         <>
-        <Helmet>
-            <title>AutoService | Register</title>
-        </Helmet>
+            <Helmet>
+                <title>AutoService | Register</title>
+            </Helmet>
             <section className="vh-100 gradient-custom">
                 <div className="container py-5 h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
@@ -86,7 +80,6 @@ const Register = () => {
                                                     id="rePassword"
                                                     name="rePassword"
                                                     placeholder="**********"
-                                                    onBlur={rePassValidation}
                                                     className="form-control form-control-lg"
                                                 />
                                                 <label className="form-label" htmlFor="rePassword">
@@ -96,7 +89,7 @@ const Register = () => {
                                             <button
                                                 className="btn btn-outline-light btn-lg px-5"
                                                 type="submit"
-                                                
+
                                             >
                                                 Register
                                             </button>
