@@ -30,7 +30,7 @@ const Home = () => {
                                 ?
                                 <Link to="/services" className="bg-primary btn-custom d-flex align-items-center"><span>Check our services</span></Link>
                                 :
-                                <Link to="/comments" className="bg-primary btn-custom d-flex align-items-center"><span>Hear from our costumers</span></Link>
+                                <Link to="/cars-in-our-service" className="bg-primary btn-custom d-flex align-items-center"><span>Check all the cars in our service</span></Link>
                             }
                         </div>
                     </div>
