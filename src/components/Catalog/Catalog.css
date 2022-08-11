@@ -1,0 +1,13 @@
+.comment.section{
+    background-color: #e8e1e1;
+}
+
+.options {
+    display: flex;
+    align-items:flex-end;
+}
+
+.options >li {
+    list-style: none;
+    padding: 10px;
+}
