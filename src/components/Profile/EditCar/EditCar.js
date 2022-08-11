@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-
+import { Helmet } from 'react-helmet';
 import * as carService from '../../../services/carService';
 import { CarContext } from "../../../contexts/CarContext";
 import AuthContext from "../../../contexts/AuthContext";
@@ -67,101 +67,106 @@ const EditCar = () => {
     };
 
     return (
-        <section className="py-5 addForm" id="offer-trip-page">
-            <h1>Edit your {currentCar.carBrand}</h1>
-            <div className="container add-car">
-                <div>
-                    <form onSubmit={onSubmit} method="post">
-                        <div className="offer-label">
-                            <div>
-                                <label htmlFor="carBrand">Car Brand</label>
+        <>
+            <Helmet>
+                <title>AutoService | Edit Car</title>
+            </Helmet>
+            <section className="py-5 addForm" id="offer-trip-page">
+                <h1>Edit your {currentCar.carBrand}</h1>
+                <div className="container add-car">
+                    <div>
+                        <form onSubmit={onSubmit} method="post">
+                            <div className="offer-label">
+                                <div>
+                                    <label htmlFor="carBrand">Car Brand</label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="text"
+                                        className="form-control-2"
+                                        id="carBrand"
+                                        placeholder="Audi"
+                                        name="carBrand"
+                                        defaultValue={currentCar.carBrand}
+                                    />
+                                </div>
+                                <label htmlFor="regNumber">
+                                    <i className="far fa-calendar-alt" /> Registration Number
+                                </label>
                             </div>
-                            <div>
+                            <div className="form-group offer-input">
+                                <input
+                                    className="form-control-2"
+                                    type="text"
+                                    id="regNumber"
+                                    name="regNumber"
+                                    placeholder="E1234EE, BEAST1"
+                                    defaultValue={currentCar.regNumber}
+
+                                />
+                            </div>
+                            <div className="offer-label">
+                                <label htmlFor="year">
+                                    <i className="far fa-calendar-alt" /> Year
+                                </label>
+                            </div>
+                            <div className="form-group offer-input">
                                 <input
                                     type="text"
                                     className="form-control-2"
-                                    id="carBrand"
-                                    placeholder="Audi"
-                                    name="carBrand"
-                                    defaultValue={currentCar.carBrand}
+                                    id="year"
+                                    placeholder="1990"
+                                    name="year"
+                                    defaultValue={currentCar.year}
+
                                 />
                             </div>
-                            <label htmlFor="regNumber">
-                                <i className="far fa-calendar-alt" /> Registration Number
-                            </label>
-                        </div>
-                        <div className="form-group offer-input">
-                            <input
-                                className="form-control-2"
-                                type="text"
-                                id="regNumber"
-                                name="regNumber"
-                                placeholder="E1234EE, BEAST1"
-                                defaultValue={currentCar.regNumber}
+                            <div className="offer-label">
+                                <label htmlFor="carImage">Car Image</label>
+                            </div>
+                            <div className="form-group offer-input">
+                                <input
+                                    type="text"
+                                    className="form-control-2"
+                                    id="carImage"
+                                    placeholder="https://..."
+                                    name="carImage"
+                                    defaultValue={currentCar.imageURL}
 
-                            />
-                        </div>
-                        <div className="offer-label">
-                            <label htmlFor="year">
-                                <i className="far fa-calendar-alt" /> Year
-                            </label>
-                        </div>
-                        <div className="form-group offer-input">
-                            <input
-                                type="text"
-                                className="form-control-2"
-                                id="year"
-                                placeholder="1990"
-                                name="year"
-                                defaultValue={currentCar.year}
+                                />
+                            </div>
+                            <div className="offer-label">
+                                <label htmlFor="milage">Milage/KM</label>
+                            </div>
+                            <div className="form-group offer-input">
+                                <input
+                                    type="text"
+                                    className="form-control-2"
+                                    id="milage"
+                                    placeholder="100000"
+                                    name="milage"
+                                    defaultValue={currentCar.carMilage}
 
-                            />
-                        </div>
-                        <div className="offer-label">
-                            <label htmlFor="carImage">Car Image</label>
-                        </div>
-                        <div className="form-group offer-input">
-                            <input
-                                type="text"
-                                className="form-control-2"
-                                id="carImage"
-                                placeholder="https://..."
-                                name="carImage"
-                                defaultValue={currentCar.imageURL}
-
-                            />
-                        </div>
-                        <div className="offer-label">
-                            <label htmlFor="milage">Milage/KM</label>
-                        </div>
-                        <div className="form-group offer-input">
-                            <input
-                                type="text"
-                                className="form-control-2"
-                                id="milage"
-                                placeholder="100000"
-                                name="milage"
-                                defaultValue={currentCar.carMilage}
-
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="description">Problem description</label>
-                            <textarea
-                                className="form-control"
-                                id="description"
-                                placeholder="Flat tire..."
-                                name="description"
-                                defaultValue={currentCar.description}
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-primary addCar">
-                            Submit
-                        </button>
-                    </form>
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="description">Problem description</label>
+                                <textarea
+                                    className="form-control"
+                                    id="description"
+                                    placeholder="Flat tire..."
+                                    name="description"
+                                    defaultValue={currentCar.description}
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-primary addCar">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 }
 

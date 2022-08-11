@@ -18,16 +18,14 @@ const MyCarDetails = (car) => {
         <div className="myCars-info">
             <img className="carImage" src={currentCar.imageURL} alt={currentCar.carBrand + ' ' + 'car image'} />
             <ul key={currentCar._id}>
-                <li>{currentCar.carBrand}</li>
-                <li>{currentCar.regNumber}</li>
-                <li>{currentCar.year}</li>
-                <li>{currentCar.carMilage}</li>
-                <li>{currentCar.description}</li>
-                <li>{currentCar.ownerEmail}</li>
+                <li>Brand : {currentCar.carBrand}</li>
+                <li>Registration number : {currentCar.regNumber}</li>
+                <li>Manufacture Year : {currentCar.year}</li>
+                <li>Car Milage : {currentCar.carMilage}</li>
+                <li>Problem Description : {currentCar.description}</li>
                 <Link to={`/profile/${currentCar._id}/edit`} className="btn btn-outline-light btn-lg px-5 edit">Edit</Link>
                 <Link to={`/profile/${currentCar._id}/delete`} className="btn btn-outline-light btn-lg px-5 remove">Remove</Link>
             </ul>
-
         </div>
     </div>
     );

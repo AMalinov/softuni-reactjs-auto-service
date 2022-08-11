@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import MyCars from "./MyCars/MyCars";
 import AuthContext from "../../contexts/AuthContext";
+import { Helmet } from "react-helmet";
 
 import "./Profile.css";
 
@@ -14,6 +15,10 @@ export default function Profile({ cars, email }) {
     }
     return (
         <>
+            <Helmet>
+                <title>AutoService | Profile</title>
+            </Helmet>
+
             <h1>My Cars</h1>
             {
                 userCars.length > 0
