@@ -6,7 +6,7 @@ import * as carService from "./services/carService"
 
 import './App.css';
 import AboutUs from './components/AboutUs/AboutUs';
-import Comments from './components/Comments/Comments';
+import Catalog from './components/Catalog/Catalog';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
@@ -88,13 +88,13 @@ function App() {
                             <Route path="/about-us" element={<AboutUs />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
-                            <Route path="/comments" element={<Comments user={user} />} />
+                            <Route path="/cars-in-our-service" element={<Catalog cars={cars}/>} />
                             <Route path="/logout" element={<Logout />} />
                             <Route path="/add-car" element={<AddCar />} />
-                            <Route path="/profile" element={<Profile cars={cars} email={user.email}/>} />
+                            <Route path="/profile" element={<Profile cars={cars} email={user.email} />} />
                             <Route path="/profile/:carId/edit" element={<EditCar />} />
                             <Route path="/profile/car/:carId/delete" element={<DeleteCar />} />
-                            <Route path="/profile/:carId/details" element={<MyCarDetails cars={cars} email={user.email}/>} />
+                            <Route path="/profile/:carId/details" element={<MyCarDetails cars={cars} email={user.email} />} />
                         </Routes>
                     </CarContext.Provider>
                 </main>
