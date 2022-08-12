@@ -1,0 +1,8 @@
+.details-h2 {
+    text-align: center;
+}
+
+.myCars-detailsCar {
+    display: grid;
+    justify-content: center;
+}
