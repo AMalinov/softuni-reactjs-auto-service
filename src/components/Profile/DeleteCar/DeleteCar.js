@@ -21,7 +21,7 @@ const DeleteCar = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        carService.deleteCar(carId, user.accessToken).then(navigate("/profile"));
+        carService.deleteCar(carId, user.accessToken).then(navigate("/"));
     }
 
     return (
