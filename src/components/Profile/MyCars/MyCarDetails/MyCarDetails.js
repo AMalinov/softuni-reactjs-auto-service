@@ -5,8 +5,6 @@ import './MyCarDetails.css';
 
 const MyCarDetails = (car) => {
 
-    const [showDialogue, setShowDialogue] = useState(false);
-
     const [currentCar, setCurrentCar] = useState({});
     const { carId } = useParams();
 
@@ -17,8 +15,6 @@ const MyCarDetails = (car) => {
             })
     }, [carId]);
 
-    console.log('likes -> ' + currentCar.likes);
-    console.log(currentCar.usedServices);
     return (
         <div className="myCars-detailsCar">
             <h2 className="details-h2">Details for your {currentCar.carBrand} : {currentCar.regNumber}</h2>
