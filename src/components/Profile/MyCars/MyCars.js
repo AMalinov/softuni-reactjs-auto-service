@@ -5,7 +5,6 @@ const MyCars = ({
     car
 }) => {
 
-    // console.log(car);
     return (
         <>
             <Helmet>

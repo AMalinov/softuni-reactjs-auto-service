@@ -1,18 +1,20 @@
-import { useContext } from "react";
 import MyCars from "./MyCars/MyCars";
-import AuthContext from "../../contexts/AuthContext";
 import { Helmet } from "react-helmet";
-
+import * as carService from '../../services/carService';
 import "./Profile.css";
+import { useEffect, useState } from "react";
 
-export default function Profile({ cars, email }) {
-    const { user } = useContext(AuthContext);
-    let userCars = [];
-    for (const [key, value] of Object.entries(cars)) {
-        if (email == value.ownerEmail) {
-            userCars.push(value);
-        }
-    }
+export default function Profile({ email }) {
+
+    const [myCars, setMyCars] = useState([]);
+
+    useEffect(() => {
+        carService.getCarByUser(email)
+            .then(result => {
+                setMyCars(result);
+            });
+    }, []);
+    
     return (
         <>
             <Helmet>
@@ -21,8 +23,8 @@ export default function Profile({ cars, email }) {
 
             <h1>My Cars</h1>
             {
-                userCars.length > 0
-                    ? userCars.map(x => <MyCars key={x._id} car={x} />)
+                myCars.length > 0
+                    ? myCars.map(x => <MyCars key={x._id} car={x} />)
 
                     : <h3 className="no-articles">No cars added yet!</h3>
             }
