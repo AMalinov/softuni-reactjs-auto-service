@@ -13,7 +13,7 @@ export default function Profile({ email }) {
             .then(result => {
                 setMyCars(result);
             });
-    }, []);
+    }, [email]);
     
     return (
         <>

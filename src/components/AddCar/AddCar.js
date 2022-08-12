@@ -22,6 +22,7 @@ const AddCar = () => {
         let carBrand = carData.get("carBrand");
         let carMilage = carData.get("milage");
         let description = carData.get("description");
+        let usedServices = [];
         let ownerEmail = user.email;
 
         carService
@@ -35,13 +36,14 @@ const AddCar = () => {
                     carMilage,
                     description,
                     ownerEmail,
+                    usedServices
                 },
                 user.accessToken
             )
             .then(navigate('/'));
     };
 
-    console.log(user.accessToken);
+
 
     return (
         <section className="py-5 addForm" id="offer-trip-page">

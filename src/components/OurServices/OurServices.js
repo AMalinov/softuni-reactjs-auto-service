@@ -3,32 +3,48 @@ import "./OurServices.css";
 import { Helmet } from "react-helmet";
 import { useEffect, useState } from "react";
 import * as carServices from '../../services/carService';
-const OurServices = ({ user }) => {
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
+
+const OurServices = ({ user }) => {
+    const [service, setService] = useState([])
+
+    const navigate = useNavigate();
     const [cars, setCars] = useState([]);
 
     const [selectedCar, setSelectedCar] = useState('');
 
     useEffect(() => {
-        carServices.getAllCars()
+        carServices.getCarByUser(user.email)
             .then(result => {
                 setCars(result);
             });
     }, []);
 
-
-    let userCars = cars.filter(x => x.ownerEmail === user.email)
-
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        console.log(e.target.parentElement[1].value);
-        if(e.target.parentElement[0].value == 'defaultSelected') {
-            alert('choose a service');
+        // console.log(e.target.parentElement[0].value);
+        // console.log(e.target.parentElement[1].value);
+        const serviceType = e.target.parentElement[0].value;
+        const carId = e.target.parentElement[1].value;
+
+        console.log(serviceType);
+        console.log(carId);
+
+        if (e.target.parentElement[0].value == 'defaultSelected' || e.target.parentElement[1].value == 'defaultSelected') {
+            alert('choose a service and a car');
             return;
         }
+
+        carServices.getOneCar(carId).then(result => {
+            result.usedServices.push(serviceType);
+            setService(result);
+        });
     }
 
+    // console.log(`${Object.entries(service)} -> what?`);
     return (
         <>
             <Helmet>
@@ -125,23 +141,20 @@ const OurServices = ({ user }) => {
                             <label htmlFor="cars" className="fw-bold mb-2 text-uppercase cars">Choose a car</label>
                             <select id="cars" name="cars" className="form-control form-control-lg" onChange={e => setSelectedCar(e.target.value)}>
                                 <option value="defaultSelected">Select Car</option>
-                                {/* {Object.entries(cars).map(([key, car]) => (
-                                    <option key={car._id}>{car.carBrand}</option>
-                                ))} */}
                                 {
-                                    userCars.map(c => (
-                                        <option key={c._id}>{c.carBrand + ' - ' + c.regNumber}</option>
+                                    cars.map(c => (
+                                        <option key={c._id} value={c._id}>{c.carBrand + ' - ' + c.regNumber}</option>
                                     ))
                                 }
                             </select>
-                            <button
+                            <Link
+                                to='/my-services'
                                 className="btn btn-outline-light btn-lg px-5 order"
-                                type="submit"
                                 onClick={onSubmitHandler}
 
                             >
                                 Order Service
-                            </button>
+                            </Link>
                         </form>
                     </div>
                 </section>

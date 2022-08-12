@@ -22,9 +22,12 @@ import EditCar from './components/Profile/EditCar/EditCar';
 import { CarContext } from './contexts/CarContext';
 import DeleteCar from './components/Profile/DeleteCar/DeleteCar';
 import MyCarDetails from './components/Profile/MyCars/MyCarDetails/MyCarDetails';
+import MyServices from './components/OurServices/MyServices/MyServices';
+import NotFound from './components/NotFound/NotFound';
 
 
 function App() {
+
     const [cars, setCars] = useState([]);
     const navigate = useNavigate();
 
@@ -50,21 +53,21 @@ function App() {
         });
     };
 
-    
+
     const carAdd = (carData) => {
         setCars(state => [
             ...state,
             carData,
         ]);
-        
+
         navigate('/catalog');
     };
-    
+
     const carEdit = (carId, carData) => {
         setCars(state => state.map(x => x._id === carId ? carData : x));
     }
-    
-    
+
+
     useEffect(() => {
         carService.getAllCars()
             .then(result => {
@@ -72,6 +75,8 @@ function App() {
                 setCars(result);
             })
     }, []);
+
+
     return (
 
         <AuthContext.Provider value={{ user, login, logout }}>
@@ -88,13 +93,15 @@ function App() {
                             <Route path="/about-us" element={<AboutUs />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
-                            <Route path="/cars-in-our-service" element={<Catalog cars={cars}/>} />
+                            <Route path="/cars-in-our-service" element={<Catalog cars={cars} />} />
                             <Route path="/logout" element={<Logout />} />
                             <Route path="/add-car" element={<AddCar />} />
+                            <Route path="/my-services" element={<MyServices user={user} />} />
                             <Route path="/profile" element={<Profile cars={cars} email={user.email} />} />
                             <Route path="/profile/:carId/details" element={<MyCarDetails cars={cars} email={user.email} />} />
                             <Route path="/profile/:carId/edit" element={<EditCar />} />
                             <Route path="/profile/:carId/delete" element={<DeleteCar />} />
+                            <Route path='*' element={<NotFound />} />
                         </Routes>
                     </CarContext.Provider>
                 </main>
