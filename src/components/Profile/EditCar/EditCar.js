@@ -35,6 +35,7 @@ const EditCar = () => {
         let carMilage = carData.get("milage");
         let description = carData.get("description");
         let ownerEmail = email;
+        let usedServices = [];
         // console.log(carBrand);
         // console.log(regNumber);
         // console.log(year);
@@ -52,7 +53,8 @@ const EditCar = () => {
             imageURL,
             carMilage,
             description,
-            ownerEmail: currentCar.ownerEmail
+            ownerEmail: currentCar.ownerEmail,
+            usedServices
         }
         carService
             .editCar(

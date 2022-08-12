@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 
 
 const OurServices = ({ user }) => {
-    const [service, setService] = useState([])
+
+    const [arrService, setArrService] = useState([])
 
     const navigate = useNavigate();
     const [cars, setCars] = useState([]);
@@ -22,11 +23,9 @@ const OurServices = ({ user }) => {
             });
     }, []);
 
-    const onSubmitHandler = (e) => {
+    const onClickHandler = (e) => {
         e.preventDefault();
 
-        // console.log(e.target.parentElement[0].value);
-        // console.log(e.target.parentElement[1].value);
         const serviceType = e.target.parentElement[0].value;
         const carId = e.target.parentElement[1].value;
 
@@ -39,12 +38,12 @@ const OurServices = ({ user }) => {
         }
 
         carServices.getOneCar(carId).then(result => {
-            result.usedServices.push(serviceType);
-            setService(result);
-        });
+            setCars(result['usedServices'].push(serviceType));
+        }).then(navigate('/my-services'));
+
+        // console.log(Promise.resolve(test));
     }
 
-    // console.log(`${Object.entries(service)} -> what?`);
     return (
         <>
             <Helmet>
@@ -150,7 +149,7 @@ const OurServices = ({ user }) => {
                             <Link
                                 to='/my-services'
                                 className="btn btn-outline-light btn-lg px-5 order"
-                                onClick={onSubmitHandler}
+                                onClick={onClickHandler}
 
                             >
                                 Order Service
