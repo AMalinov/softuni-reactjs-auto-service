@@ -62,7 +62,7 @@ const EditCar = () => {
             )
             .then(result => {
                 carEdit(carData, result);
-                navigate("/profile");
+                navigate(`/profile/${carId}/details`);
             });
     };
 
