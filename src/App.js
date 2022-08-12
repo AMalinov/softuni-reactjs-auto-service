@@ -50,6 +50,21 @@ function App() {
         });
     };
 
+    
+    const carAdd = (carData) => {
+        setCars(state => [
+            ...state,
+            carData,
+        ]);
+        
+        navigate('/catalog');
+    };
+    
+    const carEdit = (carId, carData) => {
+        setCars(state => state.map(x => x._id === carId ? carData : x));
+    }
+    
+    
     useEffect(() => {
         carService.getAllCars()
             .then(result => {
@@ -57,21 +72,6 @@ function App() {
                 setCars(result);
             })
     }, []);
-
-    const carAdd = (carData) => {
-        setCars(state => [
-            ...state,
-            carData,
-        ]);
-
-        navigate('/catalog');
-    };
-
-    const carEdit = (carId, carData) => {
-        setCars(state => state.map(x => x._id === carId ? carData : x));
-    }
-
-
     return (
 
         <AuthContext.Provider value={{ user, login, logout }}>
@@ -92,9 +92,9 @@ function App() {
                             <Route path="/logout" element={<Logout />} />
                             <Route path="/add-car" element={<AddCar />} />
                             <Route path="/profile" element={<Profile cars={cars} email={user.email} />} />
-                            <Route path="/profile/:carId/edit" element={<EditCar />} />
-                            <Route path="/profile/car/:carId/delete" element={<DeleteCar />} />
                             <Route path="/profile/:carId/details" element={<MyCarDetails cars={cars} email={user.email} />} />
+                            <Route path="/profile/:carId/edit" element={<EditCar />} />
+                            <Route path="/profile/:carId/delete" element={<DeleteCar />} />
                         </Routes>
                     </CarContext.Provider>
                 </main>
