@@ -12,6 +12,19 @@ export async function getAllCars() {
   }
 }
 
+export async function getCarByUser(email) {
+  let response = await fetch(`${URL}/car`);
+  let cars = [];
+  let result = await response.json();
+  for (const [key, value] of Object.entries(result)) {
+    if(value.ownerEmail === email) {
+      cars.push(value);
+    }
+  }
+   
+  return cars;
+}
+
 export async function getOneCar(carId) {
   let response = await fetch(`${URL}/car/${carId}`);
 
@@ -29,8 +42,7 @@ export async function addCar(carData, token) {
     body: JSON.stringify({ ...carData }),
   });
 
-  let result = await response.json();
-  return result;
+  return await response.json();
 }
 
 export async function editCar(carId, carData, token) {
@@ -42,8 +54,7 @@ export async function editCar(carId, carData, token) {
     },
     body: JSON.stringify(carData),
   });
-  let result = await response.json();
-  return result;
+  return await response.json();
 }
 
 export async function deleteCar(carId, token) {
@@ -54,6 +65,6 @@ export async function deleteCar(carId, token) {
     },
   });
 
-  let result = await response.json();
-  return result;
+   return await response.json();
+
 }
